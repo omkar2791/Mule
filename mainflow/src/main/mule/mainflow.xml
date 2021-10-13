@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a4c5dde0-6e23-4f91-a7fe-3efd27c42aa1" >
+		<http:listener-connection host="localhost" port="8082" />
+	</http:listener-config>
+	<flow name="Main_Flow" doc:id="23e78760-b1a3-45bb-ba19-3588014e61e3" >
+		<http:listener doc:name="Listener" doc:id="90a48b43-1c04-4aa1-8e4c-6048be7f9026" config-ref="HTTP_Listener_config" path="Mainflow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3869d4c0-9c12-4bbb-a85f-69e75dc93965" message="Mainflow Started"/>
+		<flow-ref doc:name="Calling Sub_Flow" doc:id="730f8f1b-1fdf-4610-879b-cf5853af0223" name="Sub_Flow"/>
+		<flow-ref doc:name="Calling Private_Flow" doc:id="e7d084df-1c6d-4ed6-86a3-d77bc3bbbf93" name="Private_Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="69d334b5-39f5-42d7-ae3d-e25265935ff4" message="Mainflow ended"/>
+	</flow>
+	<sub-flow name="Sub_Flow" doc:id="85b0e768-0dda-4696-a5f3-aa1e53ebd7d1" >
+		<logger level="INFO" doc:name="Logger" doc:id="a4ce51eb-d964-406f-9a50-274ae7ab2420" message="subflow started"/>
+		<logger level="INFO" doc:name="Logger" doc:id="7344b0a4-faf0-412c-9a99-6fb781deea00" message="subflow ended"/>
+	</sub-flow>
+	<flow name="Private_Flow" doc:id="7d10f7ff-3c35-4bf9-bcd2-d90aecf3f2f3" >
+		<logger level="INFO" doc:name="Logger" doc:id="9466d74b-4c22-4e0d-80be-6c2e97aca606" message="private flow started"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c1b14596-e846-4119-bbb6-15b1b9d9fe92" message="private flow ended"/>
+	</flow>
+</mule>
